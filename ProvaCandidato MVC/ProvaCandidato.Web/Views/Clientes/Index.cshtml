@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ProvaCandidato.Data.Entidade.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Criar Novo", "Create")
+</p>
+
+<!-- Pesquisa Form -->
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-8">
+            <input type="text" name="pesquisar" class="form-control header-mobile__search-control" value="@ViewBag.Pesquisar" placeholder="Pesquisar cliente">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i> Pesquisar
+            </button>
+        </div>
+    </div>
+}
+<!-- Pesquisa Form / End -->
+
+<table class="table" style="margin-top: 10px">
+    <tr>
+        <th>Cidade</th>
+        <th>Nome</th>
+        <th>Data Nascimento</th>
+        <th>Ativo</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cidade.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Codigo }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Codigo }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.Codigo })
+            </td>
+        </tr>
+    }
+
+</table>
